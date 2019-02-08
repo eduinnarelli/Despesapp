@@ -9,7 +9,7 @@ numeral.locale('pt-br');
 
 export const ExpensesSummary = (props) => {
 
-  const expenseWord = props.expenses.length > 1 ? 'despesas' : 'despesa';
+  const expenseWord = props.expenses.length == 1 ? 'despesa' : 'despesas';
   const formattedExpensesTotal = numeral(selectExpensesTotal(props.expenses) / 100).format('$0,0.00');
 
   return (
@@ -17,8 +17,6 @@ export const ExpensesSummary = (props) => {
     <div>
 
       {
-
-        props.expenses.length > 0 &&
 
         <h4>
           Visualizando {props.expenses.length} {expenseWord},
