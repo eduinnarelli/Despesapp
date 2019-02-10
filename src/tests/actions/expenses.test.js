@@ -1,9 +1,10 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import {
-  startAddExpense,
-  addExpense, 
-  editExpense, 
+  addExpense,
+  startAddExpense, 
+  editExpense,
+  startEditExpense, 
   removeExpense,
   startRemoveExpense, 
   setExpenses,
@@ -37,8 +38,34 @@ test('should setup remove expense action object', () => {
 
 });
 
+test('should remove expense from firebase', (done) => {
+
+  const store = createMockStore({});
+
+  store.dispatch(startRemoveExpense({id: 1})).then(() => {
+
+    const actions = store.getActions();
+
+    expect(actions[0]).toEqual({
+      type: 'REMOVE_EXPENSE',
+      id: 1
+    });
+
+    return database.ref(`expenses/${1}`).once('value');
+    
+  }).then((snapshot) => {
+
+    expect(snapshot.val()).toBeFalsy();
+    done()
+
+  });
+  
+});
+
 test('should setup edit expense action object', () => {
+
   const action = editExpense('123abc', {note: 'New note'});
+
   expect(action).toEqual({
     type: 'EDIT_EXPENSE',
     id: '123abc',
@@ -46,6 +73,42 @@ test('should setup edit expense action object', () => {
       note: 'New note'
     }
   });
+
+});
+
+test('should edit expense from firebase', (done) => {
+
+  const store = createMockStore({});
+
+  const updates = {
+    description: 'Caldo de cana',
+    amount: 500,
+    note: 'Hmmmmm'
+  };
+
+  store. dispatch(startEditExpense(2, updates)).then(() => {
+
+    const actions = store.getActions();
+
+    expect(actions[0]).toEqual({
+      type: 'EDIT_EXPENSE',
+      id: 2,
+      updates
+    });
+
+    return database.ref(`expenses/${2}`).once('value');
+
+  }).then((snapshot) => {
+
+    expect(snapshot.val()).toEqual({
+      createdAt: expenses[1].createdAt,
+      ...updates
+    });
+
+    done();
+
+  });
+
 });
 
 test('should setup add expense action object with provided values', () => {
@@ -154,23 +217,4 @@ test('should fetch the expenses from firebase', (done) => {
 
   });
 
-});
-
-test('should remove expense from firebase', (done) => {
-
-  const store = createMockStore({});
-
-  store.dispatch(startRemoveExpense({id: 1})).then(() => {
-
-    const actions = store.getActions();
-
-    expect(actions[0]).toEqual({
-      type: 'REMOVE_EXPENSE',
-      id: 1
-    });
-
-    done();
-
-  });
-  
 });
