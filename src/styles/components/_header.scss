@@ -10,12 +10,19 @@
 }
 
 .header__title {
+
   color: white;
   text-decoration: none;
+
   h1 {
     margin: 0;
     span {
       color: #7cafc9;
     }
   }
+
+  @media (max-width: $desktop-breakpoint) {
+    font-size: 1.3rem;
+  }
+
 }
