@@ -1,0 +1,34 @@
+.box-layout {
+  align-items: center;
+  background: url('/images/sad-doggo-2-adj.jpg');
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.box-layout--not-found {
+  background: url('/images/sad-doggo-adj.jpg');
+  background-size: cover;
+}
+
+.box-layout__box {
+  background: fade-out(white, .15);
+  border-radius: 3px;
+  padding: $l-size $m-size;
+  text-align: center;
+  width: 25rem;
+}
+
+.box-layout__title {
+
+  margin: 0 0 $m-size 0;
+  line-height: 1;
+  padding-bottom: $m-size;
+
+  span {
+    color: $light-blue;
+  }
+
+}

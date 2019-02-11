@@ -1,46 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render ExpensesSummary message with multiple expenses 1`] = `
-<div>
-  <h4>
-    Visualizando 
-    3
-     
-    despesas
-    , totalizando 
-     
-     
-    R$1.141,95
-  </h4>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      Visualizando 
+       
+      <span>
+        3
+      </span>
+       
+       
+      despesas
+       totalizando 
+       
+      <span>
+        R$1.141,95
+      </span>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Criar Despesa
+      </Link>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`should render ExpensesSummary message with one expense 1`] = `
-<div>
-  <h4>
-    Visualizando 
-    1
-     
-    despesa
-    , totalizando 
-     
-     
-    R$1.095,00
-  </h4>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      Visualizando 
+       
+      <span>
+        1
+      </span>
+       
+       
+      despesa
+       totalizando 
+       
+      <span>
+        R$1.095,00
+      </span>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Criar Despesa
+      </Link>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`should render empty ExpensesSummary without expenses 1`] = `
-<div>
-  <h4>
-    Visualizando 
-    0
-     
-    despesas
-    , totalizando 
-     
-     
-    R$0,00
-  </h4>
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      Visualizando 
+       
+      <span>
+        0
+      </span>
+       
+       
+      despesas
+       totalizando 
+       
+      <span>
+        R$0,00
+      </span>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        replace={false}
+        to="/create"
+      >
+        Criar Despesa
+      </Link>
+    </div>
+  </div>
 </div>
 `;

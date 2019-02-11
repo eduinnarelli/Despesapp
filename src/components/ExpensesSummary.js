@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import selectExpenses from '../selectors/expenses';
 import selectExpensesTotal from '../selectors/expenses-total';
 import numeral from 'numeral';
@@ -14,21 +15,27 @@ export const ExpensesSummary = (props) => {
 
   return (
 
-    <div>
+    <div className="page-header">
 
-      {
+      <div className="content-container">
 
-        <h4>
-          Visualizando {props.expenses.length} {expenseWord},
-          totalizando {' '} {formattedExpensesTotal}
-        </h4>
+        <h1 className="page-header__title">
+          Visualizando {' '}
+          <span>{props.expenses.length}</span>           
+          {' '} {expenseWord} totalizando {' '}
+          <span>{formattedExpensesTotal}</span>
+        </h1>
 
-      }
+        <div className="page-header__actions">
+          <Link className="button" to="/create">Criar Despesa</Link>
+        </div>
+
+      </div>
 
     </div>
 
   );
-  
+
 };
 
 const mapStateToProps = (state) => {

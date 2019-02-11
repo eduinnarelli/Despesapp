@@ -1,0 +1,39 @@
+// Setup selector styles
+// Setup className on login button
+
+.button {
+  background: $blue;
+  border: none;
+  border-bottom: .3rem solid darken($blue, 10%);
+  color: white;
+  display: inline-block;
+  font-size: $font-size-large;
+  font-weight: 300;
+  line-height: 1;
+  padding: $s-size;
+  text-decoration: none;
+}
+
+.button--link {
+  background: none;
+  border: none;
+  color: $off-white;
+  font-weight: 100;
+  padding-right: $m-size;
+  transition: color .3s ease;
+  &:hover {
+    color: $very-light-blue;
+  }
+}
+
+.button--secondary {
+
+  background: #888;
+  border-bottom: .3rem solid darken(#888, 10%);
+  margin-bottom: $m-size;
+
+  @media (min-width: $desktop-breakpoint) {
+    margin-bottom: $l-size;
+  }
+
+}

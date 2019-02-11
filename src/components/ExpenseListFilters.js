@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { DateRangePicker } from 'react-dates';
 import { setStartDate, setEndDate, setTextFilter, sortByDate, sortByAmount } from '../actions/filters';
@@ -35,37 +36,58 @@ export class ExpenseListFilters extends React.Component {
   render() {
 
     return (
-      <div>
 
-        <input
-          type="text"
-          value={this.props.filters.text}
-          onChange={this.onTextChange}
-        />
+      <div className="content-container">
 
-        <select
-          value={this.props.filters.sortBy}
-          onChange={this.onSortChange}
-        >
+        <div className="input-group">
 
-          <option value="date">Date</option>
+          <div className="input-group__item">
 
-          <option value="amount">Amount</option>
+            <input
+              type="text"
+              className="text-input"
+              placeholder="Buscar despesas"
+              value={this.props.filters.text}
+              onChange={this.onTextChange}
+            />
 
-        </select>
+          </div>
 
-        <DateRangePicker
-          startDate={this.props.filters.startDate}
-          startDateId="start_date_input"
-          endDate={this.props.filters.endDate}
-          endDateId="end_date_input"
-          onDatesChange={this.onDatesChange}
-          focusedInput={this.state.calendarFocused}
-          onFocusChange={this.onFocusChange}
-          showClearDates={true}
-          numberOfMonths={1}
-          isOutsideRange={() => false}
-        />
+          <div className="input-group__item">
+
+            <select
+              className="select"
+              value={this.props.filters.sortBy}
+              onChange={this.onSortChange}
+            >
+
+              <option value="date">Data</option>
+
+              <option value="amount">Valor</option>
+
+            </select>
+
+          </div>
+
+          <div className="input-group__item">
+
+            <DateRangePicker
+              startDate={this.props.filters.startDate}
+              startDateId="start_date_input"
+              endDate={this.props.filters.endDate}
+              endDateId="end_date_input"
+              onDatesChange={this.onDatesChange}
+              focusedInput={this.state.calendarFocused}
+              onFocusChange={this.onFocusChange}
+              showClearDates={true}
+              numberOfMonths={1}
+              isOutsideRange={() => false}
+              renderMonthElement={({ month }) => moment(month).locale('pt-br').format('MMMM YYYY')}
+            />
+
+          </div>
+
+        </div>
 
       </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import {SingleDatePicker} from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 
 const now = moment();
 console.log(now.format('MMM Do, YYYY'));
@@ -24,32 +24,32 @@ export default class ExpenseForm extends React.Component {
 
   onDescriptionChange = (e) => {
     const description = e.target.value;
-    this.setState(() => ({description}));
+    this.setState(() => ({ description }));
   };
 
   onNoteChange = (e) => {
     const note = e.target.value;
-    this.setState(() => ({note}));
-  };  
+    this.setState(() => ({ note }));
+  };
 
   onAmountChange = (e) => {
 
     const amount = e.target.value;
 
     if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-      this.setState(() => ({amount}));
+      this.setState(() => ({ amount }));
     }
 
   };
 
   onDateChange = (createdAt) => {
     if (createdAt) {
-      this.setState(() => ({createdAt}));
+      this.setState(() => ({ createdAt }));
     }
   };
 
-  onFocusChange = ({focused}) => {
-    this.setState(() => ({calendarFocused: focused}));
+  onFocusChange = ({ focused }) => {
+    this.setState(() => ({ calendarFocused: focused }));
   };
 
   onSubmit = (e) => {
@@ -57,10 +57,10 @@ export default class ExpenseForm extends React.Component {
     e.preventDefault();
 
     if (!this.state.description || !this.state.amount) {
-      this.setState(() => ({error: 'Please provide description and amount.'}));
-      
+      this.setState(() => ({ error: 'Por favor, forneça descrição e valor.' }));
+
     } else {
-      this.setState(() => ({error: ''}));
+      this.setState(() => ({ error: '' }));
       this.props.onSubmit({
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
@@ -75,48 +75,51 @@ export default class ExpenseForm extends React.Component {
 
     return (
 
-      <div>
 
-        {this.state.error && <p>{this.state.error}</p>}
-        
-        <form onSubmit={this.onSubmit}>
+      <form className="form" onSubmit={this.onSubmit}>
 
-          <input 
-            type="text"
-            placeholder="Description"
-            autoFocus
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
-          />
+        {this.state.error && <p className="form__error">{this.state.error}</p>}
 
-          <input 
-            type="text"
-            placeholder="Amount"
-            value={this.state.amount}
-            onChange={this.onAmountChange}
-          />
+        <input
+          type="text"
+          placeholder="Descrição"
+          autoFocus
+          className="text-input"
+          value={this.state.description}
+          onChange={this.onDescriptionChange}
+        />
 
-          <SingleDatePicker
-            date={this.state.createdAt}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-          />
+        <input
+          type="text"
+          placeholder="Valor"
+          className="text-input"
+          value={this.state.amount}
+          onChange={this.onAmountChange}
+        />
 
-          <textarea
-            placeholder="Add a note for your expense (optional)"
-            value={this.state.note}
-            onChange={this.onNoteChange}
-          >
-          </textarea>
+        <SingleDatePicker
+          date={this.state.createdAt}
+          onDateChange={this.onDateChange}
+          focused={this.state.calendarFocused}
+          onFocusChange={this.onFocusChange}
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+          block
+        />
 
-          <button>Add Expense</button>
+        <textarea
+          placeholder="Inclua uma anotação para sua despesa (opcional)"
+          className="textarea"
+          value={this.state.note}
+          onChange={this.onNoteChange}
+        >
+        </textarea>
 
-        </form>
-      
-      </div>
+        <div>
+          <button className="button">Salvar Despesa</button>
+        </div>
+
+      </form>
 
     );
 
